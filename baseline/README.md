@@ -3,4 +3,4 @@
 
 ### Loan Prediction Risk Model
 
-<p>Create a baseline performance for loan prediction model using a simple Neural Network. This will be implemented on a unified dataset. Data source: [Kaggle](https://www.kaggle.com/altruistdelhite04/loan-prediction-problem-dataset) </p>
+<p>Create a baseline performance for loan prediction model using a simple Neural Network. This will be implemented on a unified dataset. Data source: <a href="https://www.kaggle.com/altruistdelhite04/loan-prediction-problem-dataset">Kaggle</a> </p>
