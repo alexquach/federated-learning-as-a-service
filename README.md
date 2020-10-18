@@ -1,4 +1,5 @@
 ## Federated Learning as a serive - Train ML models without *data* [Devpost](https://devpost.com/software/federated-learning-as-a-service)
+### *Top finalist at DubHacks 2020*
 
 ## YouTube Video (click image below)
 
