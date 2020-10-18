@@ -14,11 +14,3 @@ Using this process, we can TRAIN any Machine Learning/Deep Learning model withou
 
 ## How we built it
 PyTorch, GCP, Microsoft Azure, Cloud-Storage, Blob-Storage, a lot of cloud stuff!!!
-## Challenges we ran into
-a lot... running out of time, so can't explain rn!
-## Accomplishments that we're proud of
-it worked!!!
-## What we learned
-that this proof of concept works!
-## What's next for Federated Learning as a service
-everything :D
