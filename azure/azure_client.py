@@ -97,11 +97,12 @@ def preprocess_df(dataframe, isTest=False):
     
     return df
 
+#TODO: @Alex: update azure_client to generalize to GCP Client
 
 class azure_client():
     """ Generalizable client for Azure-based models""" 
     def __init__(self, ab, container_name): 
-        self.ab = ab
+        self.ab = ab #need to change this such that it can also implement GCPBlob.
         self.container_name = container_name
 
     def _check_for_new_model(self, epoch):
