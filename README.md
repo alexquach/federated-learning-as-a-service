@@ -1,6 +1,6 @@
 ## Federated Learning as a serive - Train ML models without *data* [Devpost](https://devpost.com/software/federated-learning-as-a-service)
 
-## YouTube Video
+## YouTube Video (click image below)
 
 
 #### [![Federated Learning as a Service](images/workflow.png)](https://www.youtube.com/watch?v=gzaKo2_egVU)
