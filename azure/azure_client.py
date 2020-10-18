@@ -1,3 +1,4 @@
+import os
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
@@ -177,9 +178,15 @@ class azure_client():
     def _upload_trained_model(self, epoch, model):
         """ This will upload the trained model to Azure blob"""
         # saves locally
-        torch.save(model.state_dict(), local_post_model_name(epoch))
+        torch.save(model.state_dict(), local_post_model_name(epoch, self.container_name))
+
+        try:
+            os.remove(local_post_model_name(epoch-1, self.container_name))
+        except:
+            pass
+
         # pushes to container
-        self.cloud_helper.upload_to_blob_storage(local_post_model_name(epoch), self.container_name, blob_post_model_name(epoch), delete_blob_name=blob_post_model_name(epoch-1))
+        self.cloud_helper.upload_to_blob_storage(local_post_model_name(epoch, self.container_name), self.container_name, blob_post_model_name(epoch), delete_blob_name=blob_post_model_name(epoch-1))
 
     def poll_server(self, epoch):
         """ 
@@ -198,6 +205,7 @@ class azure_client():
             model = NN()
             model = model.to(device)
 
+            print(local_pre_model_name(epoch))
             state_dict = torch.load(local_pre_model_name(epoch))
             model.load_state_dict(state_dict) 
 

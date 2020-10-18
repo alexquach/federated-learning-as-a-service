@@ -41,6 +41,18 @@ federated_list = [
             "container": "loans-b",
             "env_key": "something"
         }}, 
+    {
+        "company_c": {
+            "cloud": AzureBlob,
+            "container": "loans-c",
+            "env_key": "something"
+        }},
+    {
+        "company_d": {
+            "cloud": AzureBlob,
+            "container": "loans-d",
+            "env_key": "something"
+        }}, 
 ]
 
 def publish_state_dict(model_state_dict, epoch):

@@ -2,3 +2,4 @@
 .vscode
 server_models
 azure/models
+azure/__pycache__

@@ -1,0 +1,31 @@
+Loan_ID,Gender,Married,Dependents,Education,Self_Employed,ApplicantIncome,CoapplicantIncome,LoanAmount,Loan_Amount_Term,Credit_History,Property_Area,Loan_Status
+LP001205,Male,Yes,0,Graduate,No,2500,3796,120,360,1,Urban,Y
+LP001206,Male,Yes,3+,Graduate,No,3029,0,99,360,1,Urban,Y
+LP001207,Male,Yes,0,Not Graduate,Yes,2609,3449,165,180,0,Rural,N
+LP001213,Male,Yes,1,Graduate,No,4945,0,,360,0,Rural,N
+LP001222,Female,No,0,Graduate,No,4166,0,116,360,0,Semiurban,N
+LP001225,Male,Yes,0,Graduate,No,5726,4595,258,360,1,Semiurban,N
+LP001228,Male,No,0,Not Graduate,No,3200,2254,126,180,0,Urban,N
+LP001233,Male,Yes,1,Graduate,No,10750,0,312,360,1,Urban,Y
+LP001238,Male,Yes,3+,Not Graduate,Yes,7100,0,125,60,1,Urban,Y
+LP001241,Female,No,0,Graduate,No,4300,0,136,360,0,Semiurban,N
+LP001243,Male,Yes,0,Graduate,No,3208,3066,172,360,1,Urban,Y
+LP001245,Male,Yes,2,Not Graduate,Yes,1875,1875,97,360,1,Semiurban,Y
+LP001248,Male,No,0,Graduate,No,3500,0,81,300,1,Semiurban,Y
+LP001250,Male,Yes,3+,Not Graduate,No,4755,0,95,,0,Semiurban,N
+LP001253,Male,Yes,3+,Graduate,Yes,5266,1774,187,360,1,Semiurban,Y
+LP001255,Male,No,0,Graduate,No,3750,0,113,480,1,Urban,N
+LP001256,Male,No,0,Graduate,No,3750,4750,176,360,1,Urban,N
+LP001259,Male,Yes,1,Graduate,Yes,1000,3022,110,360,1,Urban,N
+LP001263,Male,Yes,3+,Graduate,No,3167,4000,180,300,0,Semiurban,N
+LP001264,Male,Yes,3+,Not Graduate,Yes,3333,2166,130,360,,Semiurban,Y
+LP001265,Female,No,0,Graduate,No,3846,0,111,360,1,Semiurban,Y
+LP001266,Male,Yes,1,Graduate,Yes,2395,0,,360,1,Semiurban,Y
+LP001267,Female,Yes,2,Graduate,No,1378,1881,167,360,1,Urban,N
+LP001273,Male,Yes,0,Graduate,No,6000,2250,265,360,,Semiurban,N
+LP001275,Male,Yes,1,Graduate,No,3988,0,50,240,1,Urban,Y
+LP001279,Male,No,0,Graduate,No,2366,2531,136,360,1,Semiurban,Y
+LP001280,Male,Yes,2,Not Graduate,No,3333,2000,99,360,,Semiurban,Y
+LP001282,Male,Yes,0,Graduate,No,2500,2118,104,360,1,Semiurban,Y
+LP001289,Male,No,0,Graduate,No,8566,0,210,360,1,Urban,Y
+LP001310,Male,Yes,0,Graduate,No,5695,4167,175,360,1,Semiurban,Y
