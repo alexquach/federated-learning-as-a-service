@@ -5,9 +5,9 @@ import torch.nn.functional as F
 import time
 from dotenv import load_dotenv
 
-from azure.azure_blob import AzureBlob
-from azure.gcp_blob import GCPBlob
-from azure.utils import blob_pre_model_name, server_local_pre_model_name, blob_post_model_name, server_local_post_model_name
+from clients.azure_blob import AzureBlob
+from clients.gcp_blob import GCPBlob
+from clients.utils import blob_pre_model_name, server_local_pre_model_name, blob_post_model_name, server_local_post_model_name
 
 class NN(nn.Module):
     def __init__(self, input_features=11, layer1=20, layer2=20, out_features=2):

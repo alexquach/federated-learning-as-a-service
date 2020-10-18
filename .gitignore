@@ -1,5 +1,7 @@
 .env
 .vscode
+models
 server_models
 azure/models
 azure/__pycache__
+__pycache__/

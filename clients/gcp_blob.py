@@ -1,5 +1,6 @@
 import sys
 import time
+import os
 
 from google.cloud import storage
 
@@ -29,7 +30,7 @@ class GCPBlob():
         
         return obj
     
-    def upload_to_blob_storage(self, local_filepath, bucket_Name, blob_name):
+    def upload_to_blob_storage(self, local_filepath, bucket_Name, blob_name, delete_blob_name=None):
         """ Uploads file at `local_filepath` to the blob at `blob_name` """
         #Example: upload_to_blob_storage('data/models/policy.pth', 'loan_company_a', 'policy.pth')
         try: 
@@ -39,13 +40,19 @@ class GCPBlob():
 
             blob = bucket.blob(blob_name)
             blob.upload_from_filename(local_filepath)
-
+        except Exception as e:
+            print(e)
+        #delete the previous file (stored as delete_blob_name)
+        try:
+            if delete_blob_name:
+                print(delete_blob_name)
+                self.get_blob_client(bucket_Name, delete_blob_name).delete()
         except Exception as e:
             print(e)
 
         return
     
-    def download_from_blob_storage(self, local_filepath, bucket_Name, blob_name):
+    def download_from_blob_storage(self, local_filepath, bucket_Name, blob_name, delete_local_name=None):
         """ Downloads file at `blob_name` to the local path at `local_filepath` """
         #Example: download_from_blob_storage('data/models/policy.pth', 'loan_company_a', 'policy.pth')
         try:
@@ -58,6 +65,12 @@ class GCPBlob():
         except Exception as e:
             print(e)
 
+        try:
+            if(delete_local_name):
+                os.remove(delete_local_name)
+        except Exception as e:
+            print(e)
+            
         return
     
     def check_for_file(self, bucket_name, blob_name):

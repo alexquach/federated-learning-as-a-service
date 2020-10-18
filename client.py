@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import time
 
-from utils import blob_pre_model_name, local_pre_model_name, blob_post_model_name, local_post_model_name
+from clients.utils import blob_pre_model_name, local_pre_model_name, blob_post_model_name, local_post_model_name
 
 # this will be loaded in somehow later, 
 # maybe pickle?
@@ -98,8 +98,6 @@ def preprocess_df(dataframe, isTest=False):
     
     return df
 
-#TODO: @Alex: update azure_client to generalize to GCP Client
-
 class client():
     """ Generalizable client for Azure-based models""" 
     def __init__(self, cloud_helper, container_name): 
@@ -116,8 +114,8 @@ class client():
 
     def _load_data(self):
         """ Reading data locally """
-        train_df = pd.read_csv("./data/{0}/train.csv".format(self.container_name))
-        test_df = pd.read_csv("./data/{0}/test.csv".format(self.container_name))
+        train_df = pd.read_csv("./clients/data/{0}/train.csv".format(self.container_name))
+        test_df = pd.read_csv("./clients/data/{0}/test.csv".format(self.container_name))
 
         train_df = preprocess_df(train_df)
         test_df = preprocess_df(test_df)
@@ -207,7 +205,13 @@ class client():
             model = model.to(device)
 
             print(local_pre_model_name(epoch))
-            state_dict = torch.load(local_pre_model_name(epoch))
+            state_dict = None
+            # seems to have issues here sometimes, so adding retry logic
+            while not state_dict:
+                try: 
+                    state_dict = torch.load(local_pre_model_name(epoch))
+                except Exception as e:
+                    print(e)
             model.load_state_dict(state_dict) 
 
             # Train model further
