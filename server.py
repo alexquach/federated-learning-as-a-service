@@ -4,7 +4,9 @@ import torch.nn.functional as F
 import time
 from dotenv import load_dotenv
 
+from gcp.gcp_blob import GCPBlob
 from azure.azure_blob import AzureBlob
+
 from azure.utils import blob_pre_model_name, server_local_pre_model_name, blob_post_model_name, server_local_post_model_name
 
 class NN(nn.Module):
@@ -30,8 +32,8 @@ EPOCH_COUNT = 10
 federated_list = [
     {
         "company_a": {
-        "cloud": AzureBlob,
-        "container": "loans-a",
+        "cloud": GCPBlob,
+        "container": "company_a_loan",
         "env_key": "something"
     }}
 ]
