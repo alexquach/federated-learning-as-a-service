@@ -1,10 +1,10 @@
 ## Federated Learning as a serive - Train ML models without *data* [Devpost](https://devpost.com/software/federated-learning-as-a-service)
 
-### YouTube Video: [![Federated Learning as a Service](images/workflow.png)](https://www.youtube.com/watch?v=gzaKo2_egVU)
+## YouTube Video
 
 
-### Proof: Federated Learning works!!!
-[![Accuracy](images/proof_federated.png)](https://www.youtube.com/watch?v=gzaKo2_egVU)
+#### [![Federated Learning as a Service](images/workflow.png)](https://www.youtube.com/watch?v=gzaKo2_egVU)
+
 
 ## Inspiration
 As somewhat experienced in Machine Learning, one of the challenges I frequently ran into was availability of data. More specifically, access to data to train my models. At a time where [data doubles every 2 years](https://www.reuters.com/video/watch/id22044143), access to training ML models with reliable datasets should only increase, and not stay constant!
@@ -19,3 +19,8 @@ Using this process, we can TRAIN any Machine Learning/Deep Learning model withou
 
 ## How we built it
 PyTorch, GCP, Microsoft Azure, Cloud-Storage, Blob-Storage, a lot of cloud stuff!!!
+
+
+
+## Proof: Federated Learning works!!!
+[![Accuracy](images/proof_federated.png)](https://www.youtube.com/watch?v=gzaKo2_egVU)
