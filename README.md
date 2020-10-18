@@ -23,4 +23,4 @@ PyTorch, GCP, Microsoft Azure, Cloud-Storage, Blob-Storage, a lot of cloud stuff
 
 
 ## Proof: Federated Learning works!!!
-[![Accuracy](images/proof_federated.png)](https://www.youtube.com/watch?v=gzaKo2_egVU)
+![Accuracy](images/proof_federated.png)
