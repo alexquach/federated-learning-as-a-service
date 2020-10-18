@@ -6,6 +6,7 @@ import time
 from dotenv import load_dotenv
 
 from azure.azure_blob import AzureBlob
+from azure.gcp_blob import GCPBlob
 from azure.utils import blob_pre_model_name, server_local_pre_model_name, blob_post_model_name, server_local_post_model_name
 
 class NN(nn.Module):
@@ -37,22 +38,22 @@ federated_list = [
         }},
     {
         "company_b": {
-            "cloud": AzureBlob,
+            "cloud": GCPBlob,
             "container": "loans-b",
             "env_key": "something"
         }}, 
-    {
-        "company_c": {
-            "cloud": AzureBlob,
-            "container": "loans-c",
-            "env_key": "something"
-        }},
-    {
-        "company_d": {
-            "cloud": AzureBlob,
-            "container": "loans-d",
-            "env_key": "something"
-        }}, 
+    # {
+    #     "company_c": {
+    #         "cloud": AzureBlob,
+    #         "container": "loans-c",
+    #         "env_key": "something"
+    #     }},
+    # {
+    #     "company_d": {
+    #         "cloud": GCPBlob,
+    #         "container": "loans-d",
+    #         "env_key": "something"
+    #     }}, 
 ]
 
 def publish_state_dict(model_state_dict, epoch):

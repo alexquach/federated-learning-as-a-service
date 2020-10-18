@@ -100,7 +100,7 @@ def preprocess_df(dataframe, isTest=False):
 
 #TODO: @Alex: update azure_client to generalize to GCP Client
 
-class azure_client():
+class client():
     """ Generalizable client for Azure-based models""" 
     def __init__(self, cloud_helper, container_name): 
         self.cloud_helper = cloud_helper
