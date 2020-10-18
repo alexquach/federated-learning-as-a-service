@@ -32,7 +32,7 @@ def preprocess_df(dataframe, isTest=False):
     #https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
     df = dataframe.copy(deep=True)
     
-    null_df = np.sum(df.isnull())
+    # null_df = np.sum(df.isnull())
     # print(null_df) 
     # print(f"\nTotal null values: {np.sum(null_df)}") #get total number of null values
     ### remove all rows with null values
@@ -98,6 +98,7 @@ def preprocess_df(dataframe, isTest=False):
     
     return df
 
+#TODO: @Alex: update azure_client to generalize to GCP Client
 
 class azure_client():
     """ Generalizable client for Azure-based models""" 
