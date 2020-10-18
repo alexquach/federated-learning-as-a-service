@@ -1,3 +1,4 @@
+import os
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
@@ -30,33 +31,46 @@ EPOCH_COUNT = 10
 federated_list = [
     {
         "company_a": {
-        "cloud": AzureBlob,
-        "container": "loans-a",
-        "env_key": "something"
-    }}
+            "cloud": AzureBlob,
+            "container": "loans-a",
+            "env_key": "something"
+        }},
+    {
+        "company_b": {
+            "cloud": AzureBlob,
+            "container": "loans-b",
+            "env_key": "something"
+        }}, 
 ]
 
 def publish_state_dict(model_state_dict, epoch):
     """ Saves model locally then pushes to all databases """
     torch.save(model_state_dict, server_local_pre_model_name(epoch))
+    try:
+        os.remove(server_local_pre_model_name(epoch-1))
+    except:
+        pass
 
     for entity in federated_list: 
         cloud_helper = list(entity.values())[0]['cloud']()
         container = list(entity.values())[0]['container']
-        cloud_helper.upload_to_blob_storage(server_local_pre_model_name(epoch), container, blob_pre_model_name(epoch))
+        cloud_helper.upload_to_blob_storage(server_local_pre_model_name(epoch), container, blob_pre_model_name(epoch), delete_blob_name=blob_pre_model_name(epoch-1))
 
 def poll_clients(epoch, remaining):
     """ Looking for post_models from clients """
     for entity in remaining:
         cloud_helper = list(entity.values())[0]['cloud']()
         container = list(entity.values())[0]['container']
+
+        # downloads post_model_0
         if (cloud_helper.check_for_file(container, blob_post_model_name(epoch))):
-            cloud_helper.download_from_blob_storage(server_local_post_model_name(epoch, container), container, blob_post_model_name(epoch))
+            cloud_helper.download_from_blob_storage(server_local_post_model_name(epoch, container), container, blob_post_model_name(epoch), delete_local_name=server_local_post_model_name(epoch-1, container))
             remaining.remove(entity)
     return remaining
 
 def federated_averaging(epoch):
     result = None
+
     for entity in federated_list:
         container = list(entity.values())[0]['container']
 
@@ -66,9 +80,11 @@ def federated_averaging(epoch):
         else: # other entities
             state_dict = torch.load(server_local_post_model_name(epoch, container))
 
+        # adding all state_dict
         for param in result:
             result[param] = result[param] + state_dict[param]
     
+    # divides by number of containers at the end
     for param in result:
         result[param] = result[param] / len(federated_list)
     
@@ -79,15 +95,21 @@ remaining = federated_list.copy()
 
 torch.manual_seed(0)
 model = NN()
-publish_state_dict(model.state_dict(), epoch)
+publish_state_dict(model.state_dict(), epoch) # saves locally and then pushing to all client containers
+# pre_model_0 (pushed)
 
 while epoch < EPOCH_COUNT:
+    # checking if post_model_0 in all containers
     remaining = poll_clients(epoch, remaining)
 
+    # when no more entities remain
     if not remaining:
         updated_model = federated_averaging(epoch)
         epoch += 1
+        
+        # pushing pre_model_1
         publish_state_dict(updated_model, epoch)
+
         remaining = federated_list.copy()
     else:
         print('ab to sleep')

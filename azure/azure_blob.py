@@ -19,21 +19,32 @@ class AzureBlob():
         return self.client.get_blob_client(container=container_name, blob=blob_name)
 
 
-    def upload_to_blob_storage(self, local_filepath, container_name, blob_name):
+    def upload_to_blob_storage(self, local_filepath, container_name, blob_name, delete_blob_name=None):
         """ Uploads file at `local_filepath` to the blob at `blob_name` """
         with open(local_filepath, "rb") as data:
             try: 
                 self.get_blob_client(container_name, blob_name).upload_blob(data)
             except:
                 pass
+            try:
+                if delete_blob_name:
+                    print(delete_blob_name)
+                    self.get_blob_client(container_name, delete_blob_name).delete_blob()
+            except:
+                pass
         return
 
 
-    def download_from_blob_storage(self, local_filepath, container_name, blob_name):
+    def download_from_blob_storage(self, local_filepath, container_name, blob_name, delete_local_name=None):
         """ Downloads file at `blob_name` to the local path at `local_filepath` """
         with open(local_filepath, "wb") as download_file:
             try:
                 download_file.write(self.get_blob_client(container_name, blob_name).download_blob().readall())
+            except:
+                pass
+            try:
+                if delete_local_name:
+                    os.remove(delete_local_name)
             except:
                 pass
         return
