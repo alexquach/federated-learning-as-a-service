@@ -1,2 +1,4 @@
 .env
 .vscode
+server_models
+azure/models

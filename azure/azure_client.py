@@ -6,6 +6,8 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import time
 
+from utils import blob_pre_model_name, local_pre_model_name, blob_post_model_name, local_post_model_name
+
 # this will be loaded in somehow later, 
 # maybe pickle?
 class NN(nn.Module):
@@ -30,8 +32,8 @@ def preprocess_df(dataframe, isTest=False):
     df = dataframe.copy(deep=True)
     
     null_df = np.sum(df.isnull())
-    print(null_df) 
-    print(f"\nTotal null values: {np.sum(null_df)}") #get total number of null values
+    # print(null_df) 
+    # print(f"\nTotal null values: {np.sum(null_df)}") #get total number of null values
     ### remove all rows with null values
     df = df.dropna(how='any',axis=0) 
     del df['Loan_ID'] #remove Loan_ID (irrelevant)
@@ -95,17 +97,6 @@ def preprocess_df(dataframe, isTest=False):
     
     return df
 
-container_name = 'loans'
-# TODO: standardize filenames
-
-def blob_pre_model_name(epoch):
-    return 'pre_model_' + str(epoch) + '.pth'
-def local_pre_model_name(epoch):
-    return './models/pre_model_' + str(epoch) + '.pth'
-def blob_post_model_name(epoch):
-    return 'post_model_' + str(epoch) + '.pth'
-def local_post_model_name(epoch):
-    return './models/post_model_' + str(epoch) + '.pth'
 
 class azure_client():
     """ Generalizable client for Azure-based models""" 
@@ -139,7 +130,7 @@ class azure_client():
 
         return X_train, y_train, device
 
-    def _train(self, model, X_train, y_train, train_epochs=int(1e3), print_every=100, epsilon=0.5):
+    def _train(self, model, X_train, y_train, train_epochs=int(1e2), print_every=100, epsilon=0.5):
         """
         Train the model.
          @Param:
@@ -194,12 +185,8 @@ class azure_client():
             model = NN()
             model = model.to(device)
 
-            print(model.state_dict())
-
             state_dict = torch.load(local_pre_model_name(epoch))
             model.load_state_dict(state_dict) 
-
-            print('this is it' + str(model.state_dict()))
 
             # Train model further
             updated_model, loss = self._train(model, X_train, y_train)

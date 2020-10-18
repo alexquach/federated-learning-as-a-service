@@ -13,13 +13,13 @@ load_dotenv()
 epoch = 0
 EPOCH_COUNT = 10
 
-container_name = 'loans'
+container_name = 'loans-a'
 ab = AzureBlob()
 azure_client = azure_client(ab, container_name)
 
 while epoch < EPOCH_COUNT:
     epoch = azure_client.poll_server(epoch)
     print('ab to sleep')
-    time.sleep(60)
+    time.sleep(5)
 
 

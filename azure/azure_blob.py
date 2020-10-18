@@ -22,14 +22,20 @@ class AzureBlob():
     def upload_to_blob_storage(self, local_filepath, container_name, blob_name):
         """ Uploads file at `local_filepath` to the blob at `blob_name` """
         with open(local_filepath, "rb") as data:
-            self.get_blob_client(container_name, blob_name).upload_blob(data)
+            try: 
+                self.get_blob_client(container_name, blob_name).upload_blob(data)
+            except:
+                pass
         return
 
 
     def download_from_blob_storage(self, local_filepath, container_name, blob_name):
         """ Downloads file at `blob_name` to the local path at `local_filepath` """
         with open(local_filepath, "wb") as download_file:
-            download_file.write(self.get_blob_client(container_name, blob_name).download_blob().readall())
+            try:
+                download_file.write(self.get_blob_client(container_name, blob_name).download_blob().readall())
+            except:
+                pass
         return
         
     
